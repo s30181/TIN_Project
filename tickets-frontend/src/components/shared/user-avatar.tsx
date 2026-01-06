@@ -21,7 +21,7 @@ const sizeClasses = {
 export function UserAvatar({ email, size = 'md', className }: UserAvatarProps) {
   return (
     <div
-      className={`rounded-full bg-primary/10 flex items-center justify-center font-semibold text-primary ${sizeClasses[size]} ${className ?? ''}`}
+      className={cn(`rounded-full bg-primary/10 flex items-center justify-center font-semibold text-primary`, sizeClasses[size], className)}
     >
       {getUserInitials(email)}
     </div>
@@ -42,7 +42,7 @@ const iconSizeClasses = {
 export function UserAvatarIcon({ size = 'md', className }: UserAvatarIconProps) {
   return (
     <div
-      className={`bg-primary/10 p-1.5 rounded-full text-primary ${className ?? ''}`}
+      className={cn(`bg-primary/10  rounded-full text-primary`, iconSizeClasses[size], className)}
     >
       <Icon icon="lucide:user" className={iconSizeClasses[size]} />
     </div>

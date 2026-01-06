@@ -30,6 +30,8 @@ function ReservationPageWrapper() {
 }
 
 function ReservationPageLoading() {
+  // TODO: Maybe use a skeleton loader instead?
+
   return (
     <div className="min-h-screen bg-neutral-900 flex items-center justify-center">
       <Icon icon="lucide:loader-2" className="w-8 h-8 animate-spin" />

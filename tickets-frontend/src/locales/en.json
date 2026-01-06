@@ -1,23 +1,16 @@
 {
   "navbar": {
-    "home": "Home",
     "events": "Events",
     "reservations": "Reservations",
-    "categories": "Categories",
+    "users": "Users",
     "signIn": "Sign In",
-    "signUp": "Sign Up",
     "signOut": "Sign Out",
-    "loggingOut": "Logging out...",
+    "loggingOut": "Logging out",
     "profile": "Profile",
     "create": "Create",
     "createEvent": "Create Event",
     "createReservation": "Create Reservation",
     "getStarted": "Get Started",
-    "theme": {
-      "light": "Light",
-      "dark": "Dark",
-      "system": "System"
-    },
     "language": "Language",
     "language.en": "English",
     "language.pl": "Polish"
@@ -28,18 +21,17 @@
     "createAccountTitle": "Create Account",
     "createAccountDescription": "Enter your email and password to create a new account.",
     "email": "Email",
-    "password": "Password",
-    "signingIn": "Signing in...",
-    "creatingAccount": "Creating account..."
+    "password": "Password"
   },
   "home": {
+    "featuredEvent": "Featured Event",
     "heroTitle": "Welcome to TicketsMaster!",
     "heroSubtitle": "Browse events, reservations, users and more",
     "exploreEvents": "Explore Events",
-    "sellTickets": "Sell Tickets",
     "recentEvents": "Recent Events",
     "recentEventsSubtitle": "Recent events added",
-    "viewAll": "View all"
+    "viewAll": "View all",
+    "bannerAlt": "Event banner image"
   },
   "common": {
     "cancel": "Cancel",
@@ -48,47 +40,43 @@
   },
   "events": {
     "exploreTitle": "Explore Events",
-    "noEvents": "No events found",
-    "loading": "Loading...",
-    "error": "Error: ",
+    "exploreSubtitle": "Discover concerts, conferences, exhibitions and more in your area.",
+    "searchPlaceholder": "Search events, locations",
+    "sortBy": "Sort by",
+    "sort": {
+      "latest": "Latest",
+      "oldest": "Oldest",
+      "popular": "Popular",
+      "titleAsc": "Title (A-Z)",
+      "titleDesc": "Title (Z-A)"
+    },
+    "empty": {
+      "title": "No Events",
+      "description": "There are no events available at the moment."
+    },
     "form": {
       "createTitle": "Create New Event",
+      "createDescription": "Fill in the details below to create a new event.",
       "editTitle": "Edit Event",
+      "editDescription": "Update the event details below.",
       "title": "Event Title",
-      "titleRequired": "Title is required",
+      "titlePlaceholder": "E.g: Neon Nights Music Festival",
       "description": "Description",
-      "descriptionMinLength": "Description must be at least 10 characters",
+      "descriptionPlaceholder": "Describe your event",
       "location": "Location",
-      "locationRequired": "Location is required",
+      "locationPlaceholder": "E.g: Convention Center",
       "startsAt": "Date",
-      "startsAtRequired": "Date is required",
       "price": "Price (in cents)",
       "createButton": "Create Event",
-      "creatingButton": "Creating...",
+      "creatingButton": "Creating",
       "saveButton": "Save Changes",
-      "savingButton": "Saving...",
-      "cancelButton": "Cancel",
-      "fixErrors": "Please fix errors",
-      "failedToCreate": "Failed to create event:"
+      "savingButton": "Saving"
     },
     "delete": {
       "title": "Delete Event",
       "description": "Are you sure you want to delete \"{{title}}\"? This action cannot be undone.",
       "confirmButton": "Delete Event",
-      "deletingButton": "Deleting..."
-    },
-    "details": {
-      "about": "About the Event",
-      "tickets": "Get Tickets",
-      "ticketsDescription": "Select your preferred ticket type.",
-      "attendees": "Attendees",
-      "noAttendees": "No attendees yet.",
-      "loading": "Error fetching event",
-      "free": "Free",
-      "reserve": "Reserve",
-      "buyNow": "Buy Now",
-      "cancel": "Cancel",
-      "delete": "Delete"
+      "deletingButton": "Deleting"
     }
   },
   "event": {
@@ -105,6 +93,7 @@
   },
   "reservations": {
     "title": "Reservations",
+    "description": "Browse and manage your reservations",
     "allReservations": "All Reservations",
     "myReservations": "My Reservations",
     "noReservations": "No reservations found.",
@@ -119,44 +108,37 @@
     },
     "detail": {
       "title": "Reservation Details",
-      "eventDetails": "Event Details",
-      "reservationInfo": "Reservation Info",
       "event": "Event",
-      "date": "Date",
-      "location": "Location",
-      "price": "Price",
-      "status": "Status",
       "reservationId": "Reservation ID",
       "purchasedAt": "Purchased At",
-      "user": "User",
-      "backToList": "Back to Reservations"
+      "user": "User"
     },
     "edit": {
       "button": "Edit",
       "title": "Edit Reservation",
       "description": "Update your reservation details",
       "saveButton": "Save Changes",
-      "savingButton": "Saving..."
+      "savingButton": "Saving"
     },
     "delete": {
       "button": "Delete",
       "title": "Delete Reservation",
       "description": "Are you sure you want to delete your reservation for \"{{event}}\"? This action cannot be undone.",
       "confirmButton": "Delete",
-      "deletingButton": "Deleting..."
+      "deletingButton": "Deleting"
     },
     "cancel": {
       "button": "Cancel",
       "title": "Cancel Reservation",
       "description": "Are you sure you want to cancel your reservation for \"{{event}}\"? You can still view it but won't be able to edit the status.",
       "confirmButton": "Cancel Reservation",
-      "cancellingButton": "Cancelling..."
+      "cancellingButton": "Cancelling"
     },
     "create": {
       "title": "Create Reservation",
       "description": "Select an event to reserve",
       "createButton": "Create Reservation",
-      "creatingButton": "Creating..."
+      "creatingButton": "Creating"
     },
     "form": {
       "event": "Event",
@@ -166,23 +148,37 @@
       "noAvailableEvents": "No available events"
     }
   },
+  "users": {
+    "title": "Users",
+    "empty": {
+      "title": "No Users",
+      "description": "There are no users to display."
+    },
+    "table": {
+      "user": "User",
+      "role": "Role",
+      "createdAt": "Created At",
+      "actions": "Actions"
+    },
+    "form": {
+      "editTitle": "Edit User",
+      "email": "Email",
+      "role": "Role",
+      "saveButton": "Save Changes",
+      "savingButton": "Saving"
+    },
+    "roles": {
+      "admin": "Admin",
+      "user": "User"
+    },
+    "delete": {
+      "title": "Delete User",
+      "description": "Are you sure you want to delete this user? This action cannot be undone.",
+      "confirmButton": "Delete User",
+      "deletingButton": "Deleting"
+    }
+  },
   "user": {
-    "events": {
-      "title": "My Events",
-      "subtitle": "Manage the events you have organized",
-      "noEvents": "No events created yet",
-      "startJourney": "Start your journey as an organizer today!"
-    },
-    "tickets": {
-      "title": "My Tickets",
-      "subtitle": "View your purchased tickets and events",
-      "noTickets": "No tickets purchased yet",
-      "browseEvents": "Browse events to find your next experience!",
-      "statusPaid": "Paid",
-      "statusReserved": "Reserved",
-      "statusCancelled": "Cancelled",
-      "viewEvent": "View Event"
-    },
     "profile": {
       "title": "User Profile",
       "events": "User Events",

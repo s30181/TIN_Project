@@ -1,5 +1,6 @@
 import type { UserDto } from '@/api/types.gen'
 import { Badge } from '@/components/ui/badge'
+import { cn } from '@/lib/utils'
 
 type UserRole = UserDto['role']
 
@@ -24,7 +25,7 @@ export function UserRoleBadge({
   return (
     <Badge
       variant={roleVariants[role]}
-      className={`${sizeClasses} ${className ?? ''}`}
+      className={cn(sizeClasses, className)}
     >
       {role}
     </Badge>

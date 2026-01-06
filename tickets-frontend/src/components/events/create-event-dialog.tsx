@@ -57,7 +57,7 @@ export function CreateEventDialog({ open, onOpenChange }: CreateEventDialogProps
       price: 0,
     },
     validators: {
-      onSubmit: zCreateEventDto as any,
+      onSubmit: zCreateEventDto as any // TODO: Remove any,
     },
     onSubmit: async ({ value }) => {
       await createEventMutation.mutateAsync(value as any)

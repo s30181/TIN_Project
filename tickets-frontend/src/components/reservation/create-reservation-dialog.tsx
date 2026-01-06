@@ -202,7 +202,7 @@ export function CreateReservationDialog({
                 disabled={createMutation.isPending}
               >
                 {createMutation.isPending
-                  ? t('reservations.create.creatingButton', 'Creating...')
+                  ? t('reservations.create.creatingButton', 'Creating')
                   : t('reservations.create.createButton', 'Create Reservation')}
               </Button>
             </DialogFooter>

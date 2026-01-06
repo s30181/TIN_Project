@@ -1,23 +1,16 @@
 {
   "navbar": {
-    "home": "Strona główna",
     "events": "Wydarzenia",
     "reservations": "Rezerwacje",
-    "categories": "Kategorie",
+    "users": "Użytkownicy",
     "signIn": "Zaloguj się",
-    "signUp": "Zarejestruj się",
     "signOut": "Wyloguj się",
-    "loggingOut": "Wylogowywanie...",
+    "loggingOut": "Wylogowywanie",
     "profile": "Profil",
     "create": "Utwórz",
     "createEvent": "Utwórz wydarzenie",
     "createReservation": "Utwórz rezerwację",
     "getStarted": "Rozpocznij",
-    "theme": {
-      "light": "Jasny",
-      "dark": "Ciemny",
-      "system": "System"
-    },
     "language": "Język",
     "language.en": "Angielski",
     "language.pl": "Polski"
@@ -28,19 +21,17 @@
     "createAccountTitle": "Utwórz konto",
     "createAccountDescription": "Wpisz swój email i hasło, aby utworzyć nowe konto.",
     "email": "Email",
-    "password": "Hasło",
-    "signingIn": "Logowanie...",
-    "creatingAccount": "Tworzenie konta..."
+    "password": "Hasło"
   },
   "home": {
     "featuredEvent": "Wyróżnione wydarzenie",
     "heroTitle": "Odkryj swoje kolejne niezapomniane przeżycie",
     "heroSubtitle": "Przeglądaj tysiące koncertów, festiwali, konferencji i wystaw w Twojej okolicy.",
     "exploreEvents": "Przeglądaj wydarzenia",
-    "sellTickets": "Sprzedawaj bilety",
     "recentEvents": "Najnowsze wydarzenia",
     "recentEventsSubtitle": "Świeżo dodane wydarzenia, które mogą Ci się spodobać.",
-    "viewAll": "Zobacz wszystkie"
+    "viewAll": "Zobacz wszystkie",
+    "bannerAlt": "Baner wydarzenia"
   },
   "common": {
     "cancel": "Anuluj",
@@ -50,7 +41,7 @@
   "events": {
     "exploreTitle": "Przeglądaj wydarzenia",
     "exploreSubtitle": "Odkryj koncerty, konferencje, wystawy i wiele więcej w Twojej okolicy.",
-    "searchPlaceholder": "Szukaj wydarzeń, lokalizacji...",
+    "searchPlaceholder": "Szukaj wydarzeń, lokalizacji",
     "sortBy": "Sortuj według",
     "sort": {
       "latest": "Najnowsze",
@@ -59,9 +50,10 @@
       "titleAsc": "Tytuł (A-Z)",
       "titleDesc": "Tytuł (Z-A)"
     },
-    "noEvents": "Nie znaleziono wydarzeń",
-    "loading": "Ładowanie...",
-    "error": "Błąd: ",
+    "empty": {
+      "title": "Brak wydarzeń",
+      "description": "Obecnie nie ma dostępnych wydarzeń."
+    },
     "form": {
       "createTitle": "Utwórz nowe wydarzenie",
       "createDescription": "Wypełnij szczegóły poniżej, aby utworzyć nowe wydarzenie.",
@@ -69,45 +61,22 @@
       "editDescription": "Zaktualizuj szczegóły wydarzenia poniżej.",
       "title": "Tytuł wydarzenia",
       "titlePlaceholder": "Np: Festiwal Muzyczny Neon Nights",
-      "titleRequired": "Tytuł jest wymagany",
       "description": "Opis",
-      "descriptionPlaceholder": "Opisz swoje wydarzenie...",
-      "descriptionMinLength": "Opis musi mieć co najmniej 10 znaków",
+      "descriptionPlaceholder": "Opisz swoje wydarzenie",
       "location": "Lokalizacja",
       "locationPlaceholder": "Np: Centrum Kongresowe",
-      "locationRequired": "Lokalizacja jest wymagana",
       "startsAt": "Data",
-      "startsAtRequired": "Data jest wymagana",
       "price": "Cena (w groszach)",
-      "image": "Adres URL obrazu",
-      "imageOptional": "Opcjonalne. Zostaw puste dla domyślnego obrazu.",
-      "imageInvalid": "Musi być poprawnym adresem URL",
       "createButton": "Utwórz wydarzenie",
-      "creatingButton": "Tworzenie...",
+      "creatingButton": "Tworzenie",
       "saveButton": "Zapisz zmiany",
-      "savingButton": "Zapisywanie...",
-      "cancelButton": "Anuluj",
-      "fixErrors": "Proszę poprawić błędy w formularzu",
-      "failedToCreate": "Nie udało się utworzyć wydarzenia:"
+      "savingButton": "Zapisywanie"
     },
     "delete": {
       "title": "Usuń wydarzenie",
       "description": "Czy na pewno chcesz usunąć \"{{title}}\"? Ta operacja jest nieodwracalna.",
       "confirmButton": "Usuń wydarzenie",
-      "deletingButton": "Usuwanie..."
-    },
-    "details": {
-      "about": "O wydarzeniu",
-      "tickets": "Bilety",
-      "ticketsDescription": "Wybierz preferowany rodzaj biletu.",
-      "attendees": "Uczestnicy",
-      "noAttendees": "Brak uczestników.",
-      "loading": "Błąd podczas pobierania wydarzenia",
-      "free": "Darmowy",
-      "reserve": "Zarezerwuj",
-      "buyNow": "Kup teraz",
-      "cancel": "Anuluj",
-      "delete": "Usuń"
+      "deletingButton": "Usuwanie"
     }
   },
   "event": {
@@ -139,44 +108,37 @@
     },
     "detail": {
       "title": "Szczegóły rezerwacji",
-      "eventDetails": "Szczegóły wydarzenia",
-      "reservationInfo": "Informacje o rezerwacji",
       "event": "Wydarzenie",
-      "date": "Data",
-      "location": "Lokalizacja",
-      "price": "Cena",
-      "status": "Status",
       "reservationId": "ID rezerwacji",
       "purchasedAt": "Data zakupu",
-      "user": "Użytkownik",
-      "backToList": "Powrót do rezerwacji"
+      "user": "Użytkownik"
     },
     "edit": {
       "button": "Edytuj",
       "title": "Edytuj rezerwację",
       "description": "Zaktualizuj szczegóły rezerwacji",
       "saveButton": "Zapisz zmiany",
-      "savingButton": "Zapisywanie..."
+      "savingButton": "Zapisywanie"
     },
     "delete": {
       "button": "Usuń",
       "title": "Usuń rezerwację",
       "description": "Czy na pewno chcesz usunąć rezerwację na \"{{event}}\"? Ta operacja jest nieodwracalna.",
       "confirmButton": "Usuń",
-      "deletingButton": "Usuwanie..."
+      "deletingButton": "Usuwanie"
     },
     "cancel": {
       "button": "Anuluj",
       "title": "Anuluj rezerwację",
       "description": "Czy na pewno chcesz anulować rezerwację na \"{{event}}\"? Będziesz mógł ją nadal przeglądać, ale nie będziesz mógł edytować statusu.",
       "confirmButton": "Anuluj rezerwację",
-      "cancellingButton": "Anulowanie..."
+      "cancellingButton": "Anulowanie"
     },
     "create": {
       "title": "Utwórz rezerwację",
       "description": "Wybierz wydarzenie do zarezerwowania",
       "createButton": "Utwórz rezerwację",
-      "creatingButton": "Tworzenie..."
+      "creatingButton": "Tworzenie"
     },
     "form": {
       "event": "Wydarzenie",
@@ -186,23 +148,37 @@
       "noAvailableEvents": "Brak dostępnych wydarzeń"
     }
   },
+  "users": {
+    "title": "Użytkownicy",
+    "empty": {
+      "title": "Brak użytkowników",
+      "description": "Nie ma użytkowników do wyświetlenia."
+    },
+    "table": {
+      "user": "Użytkownik",
+      "role": "Rola",
+      "createdAt": "Data utworzenia",
+      "actions": "Akcje"
+    },
+    "form": {
+      "editTitle": "Edytuj użytkownika",
+      "email": "Email",
+      "role": "Rola",
+      "saveButton": "Zapisz zmiany",
+      "savingButton": "Zapisywanie"
+    },
+    "roles": {
+      "admin": "Administrator",
+      "user": "Użytkownik"
+    },
+    "delete": {
+      "title": "Usuń użytkownika",
+      "description": "Czy na pewno chcesz usunąć tego użytkownika? Ta operacja jest nieodwracalna.",
+      "confirmButton": "Usuń użytkownika",
+      "deletingButton": "Usuwanie"
+    }
+  },
   "user": {
-    "events": {
-      "title": "Moje wydarzenia",
-      "subtitle": "Zarządzaj wydarzeniami, które zorganizowałeś",
-      "noEvents": "Jeszcze nie utworzono żadnych wydarzeń",
-      "startJourney": "Rozpocznij swoją przygodę jako organizator już dziś!"
-    },
-    "tickets": {
-      "title": "Moje bilety",
-      "subtitle": "Zobacz zakupione bilety i wydarzenia",
-      "noTickets": "Jeszcze nie kupiono żadnych biletów",
-      "browseEvents": "Przeglądaj wydarzenia, aby znaleźć kolejne przeżycie!",
-      "statusPaid": "Opłacone",
-      "statusReserved": "Zarezerwowane",
-      "statusCancelled": "Anulowane",
-      "viewEvent": "Zobacz wydarzenie"
-    },
     "profile": {
       "title": "Profil użytkownika",
       "events": "Zorganizowane wydarzenia",

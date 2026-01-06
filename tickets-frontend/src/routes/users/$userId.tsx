@@ -18,6 +18,7 @@ export const Route = createFileRoute('/users/$userId')({
 })
 
 function UserPageWrapper() {
+  // TODO: Add error boundary
   return (
     <Suspense fallback={<UserPageLoading />}>
       <UserPage />
@@ -111,6 +112,7 @@ function UserEventsSection({
 }
 
 function EmptyEventsState() {
+  const { t } = useTranslation()
 
   return (
     <Empty>
@@ -118,10 +120,9 @@ function EmptyEventsState() {
         <EmptyMedia variant="icon">
           <Icon icon="lucide:calendar-off" />
         </EmptyMedia>
-        <EmptyTitle>No Events Yet</EmptyTitle>
+        <EmptyTitle>{t('user.events.empty.title', 'No Events')}</EmptyTitle>
         <EmptyDescription>
-          You haven&apos;t created any events yet. Get started by creating
-          your first event.
+          {t('user.events.empty.description', 'You haven\'t created any events yet. Get started by creating your first event')}
         </EmptyDescription>
       </EmptyHeader>
     </Empty>

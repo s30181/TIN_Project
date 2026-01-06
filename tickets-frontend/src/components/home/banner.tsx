@@ -5,11 +5,12 @@ import { Button } from '@/components/ui/button'
 
 export function Banner() {
   const { t } = useTranslation()
+
   return (
     <section className="relative h-[600px] w-full bg-neutral-900 text-white overflow-hidden">
       <img
         src="https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-        alt="Concert crowd with colorful lights at a live music event"
+        alt={t('home.bannerAlt', 'Colorfull banner image')}
         className="absolute inset-0 w-full h-full object-cover opacity-40"
       />
       <div className="absolute inset-0 bg-linear-to-t from-neutral-900 to-transparent" />

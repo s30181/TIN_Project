@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next'
 import type { ReservationDto } from '@/api/types.gen'
 import { Badge } from '@/components/ui/badge'
+import { cn } from '@/lib/utils'
 
 type ReservationStatus = ReservationDto['status']
 
@@ -33,7 +34,7 @@ export function ReservationStatusBadge({
   return (
     <Badge
       variant={statusVariants[status]}
-      className={`capitalize ${className ?? ''}`}
+      className={cn(`capitalize`, className)}
     >
       {statusLabels[status]}
     </Badge>

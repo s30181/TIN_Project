@@ -34,7 +34,7 @@ export class AuthController {
 
   @Post('login')
   @HttpCode(HttpStatus.OK)
-  @ApiOperation({ summary: 'Login user', operationId: 'login' })
+  @ApiOperation({ operationId: 'login' })
   @ApiOkResponse({ type: AuthResponseDto })
   @ApiUnauthorizedResponse({})
   async login(

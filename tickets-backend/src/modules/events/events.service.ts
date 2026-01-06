@@ -13,7 +13,7 @@ import { ReservationDto } from '../reservations/dto/reservation.dto';
 
 @Injectable()
 export class EventsService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(private readonly prisma: PrismaService) { }
 
   private formatDateToString(date: Date): string {
     return date.toISOString().split('T')[0];
@@ -42,6 +42,7 @@ export class EventsService {
   }
 
   async findAll(query: GetEventsQueryDto): Promise<PagedEventsDto> {
+    // TODO: Refactor this to generic pagination
     const page = query.page ?? 1;
     const limit = query.limit ?? 10;
     const skip = (page - 1) * limit;

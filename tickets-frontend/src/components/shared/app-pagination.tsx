@@ -38,7 +38,6 @@ export function AppPagination({
         <PaginationItem>
           <span className='px-4 py-2 text-sm text-muted-foreground'>
             {currentPage}
-
           </span>
         </PaginationItem>
 
