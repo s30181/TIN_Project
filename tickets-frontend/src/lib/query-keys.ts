@@ -3,6 +3,8 @@ export const queryKeys = {
   currentUser: ['currentUser'] as const,
 
   // Users
+  allUsers: ['users'] as const,
+  users: (page?: number, limit?: number) => ['users', page, limit] as const,
   user: (id: number) => ['user', id] as const,
   userEvents: (id: number, page?: number, limit?: number) =>
     ['userEvents', id, page, limit] as const,

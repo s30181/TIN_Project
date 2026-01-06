@@ -12,7 +12,6 @@ interface UserRoleBadgeProps {
 const roleVariants: Record<UserRole, 'default' | 'outline'> = {
   admin: 'default',
   user: 'outline',
-  guest: 'outline',
 }
 
 export function UserRoleBadge({

@@ -1,12 +1,13 @@
-import { createFileRoute, useNavigate } from '@tanstack/react-router'
+import { createFileRoute, redirect, useNavigate } from '@tanstack/react-router'
 import { useTranslation } from 'react-i18next'
 import { Icon } from '@iconify/react'
+import { useQuery, useSuspenseQuery } from '@tanstack/react-query'
 import { getReservations } from '@/api'
 import { ReservationCard } from '@/components/reservation/reservation-card'
 import { AppPagination } from '@/components/shared/app-pagination'
 import { queryKeys } from '@/lib/query-keys'
-import { useProtectedSuspenseQuery } from '@/hooks/use-protected-query'
-import { Empty, EmptyHeader, EmptyMedia, EmptyTitle, EmptyDescription } from '@/components/ui/empty'
+import { Empty, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from '@/components/ui/empty'
+import { useAuth } from '@/hooks/use-auth'
 
 export type ReservationsSearch = {
   page: number
@@ -18,7 +19,7 @@ export const Route = createFileRoute('/reservations/')({
     return {
       page: Number(search.page ?? 1),
     }
-  },
+  }
 })
 
 function ReservationsPage() {
@@ -26,10 +27,12 @@ function ReservationsPage() {
   const navigate = useNavigate({ from: '/reservations' })
   const { page } = Route.useSearch()
   const limit = 20
+  const { isAuthenticated } = useAuth()
 
-  const { data } = useProtectedSuspenseQuery({
+  const { data } = useQuery({
     queryKey: queryKeys.reservations(page, limit),
-    queryFn: () => getReservations({ query: { page, limit } }),
+    queryFn: () => getReservations({ query: { page, limit }, throwOnError: true }).then((res) => res.data),
+    enabled: isAuthenticated,
   })
 
   const totalPages = data?.totalPages ?? 1
@@ -40,14 +43,17 @@ function ReservationsPage() {
     navigate({ search: (prev) => ({ ...prev, page: newPage }) })
   }
 
+  if (!isAuthenticated) {
+    navigate({ to: '/' })
+    return null
+  }
+
   return (
     <div className="min-h-screen bg-neutral-900 pb-20 pt-24">
       <div className="container mx-auto px-4">
         <div className="mb-8">
           <h1 className="text-3xl font-bold">{t('reservations.title', 'Reservations')}</h1>
-          <p className="text-muted-foreground mt-2">
-            {t('reservations.description', 'View and manage your event reservations')}
-          </p>
+
         </div>
 
         {reservations.length === 0 ? (

@@ -7,15 +7,17 @@ import {
   UseGuards,
   Patch,
   Body,
+  Delete,
+  HttpCode,
+  HttpStatus,
 } from '@nestjs/common';
 import {
   ApiOkResponse,
   ApiOperation,
   ApiTags,
   ApiCookieAuth,
-  ApiUnauthorizedResponse,
   ApiQuery,
-  ApiForbiddenResponse,
+  ApiNoContentResponse,
 } from '@nestjs/swagger';
 import { UsersService } from './users.service';
 import { UserDto, PagedUsersDto } from './dto/user.dto';
@@ -74,6 +76,17 @@ export class UsersController {
     @Body() updateUserDto: UpdateUserDto,
   ): Promise<UserDto> {
     return this.usersService.update(id, updateUserDto);
+  }
+
+  @Delete(':id')
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(UserRole.admin)
+  @HttpCode(HttpStatus.NO_CONTENT)
+  @ApiCookieAuth()
+  @ApiNoContentResponse({})
+  @ApiOperation({ operationId: 'deleteUser' })
+  async remove(@Param('id', ParseIntPipe) id: number): Promise<void> {
+    return this.usersService.remove(id);
   }
 
   @Get(':id/ticket')

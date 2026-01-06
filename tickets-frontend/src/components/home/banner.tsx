@@ -8,21 +8,19 @@ export function Banner() {
   return (
     <section className="relative h-[600px] w-full bg-neutral-900 text-white overflow-hidden">
       <img
-        src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=2070&auto=format&fit=crop"
+        src="https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
         alt="Concert crowd with colorful lights at a live music event"
         className="absolute inset-0 w-full h-full object-cover opacity-40"
       />
       <div className="absolute inset-0 bg-linear-to-t from-neutral-900 to-transparent" />
 
       <div className="relative mx-auto px-4 h-full flex flex-col justify-center items-start pt-20">
-        <Badge className="mb-4 bg-primary text-primary-foreground hover:bg-primary/90">
-          {t('home.featuredEvent', 'Featured Event')}
-        </Badge>
+
         <h1 className="text-7xl font-bold mb-6">
-          {t('home.heroTitle', 'Discover Your Next Unforgettable Experience')}
+          {t('home.heroTitle', 'Welcome to Ticket Masters!')}
         </h1>
         <p className="text-2xl text-neutral-300 max-w-2xl mb-8">
-          {t('home.heroSubtitle', 'Browse thousands of concerts, festivals, conferences, and exhibitions happening near you.')}
+          {t('home.heroSubtitle', 'Browse events, reservations and users.')}
         </p>
         <div className="flex gap-4">
           <Button

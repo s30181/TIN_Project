@@ -7,9 +7,6 @@ export type ClientOptions = {
 export type CreateEventDto = {
     title: string;
     location?: string;
-    /**
-     * Date in YYYY-MM-DD format
-     */
     startsAt: Date;
     price: number;
 };
@@ -18,9 +15,6 @@ export type EventDto = {
     id: number;
     title: string;
     location?: string | null;
-    /**
-     * Date in YYYY-MM-DD format
-     */
     startsAt: string;
     price: number;
     organizerId: number;
@@ -38,7 +32,7 @@ export type PagedEventsDto = {
 export type UserDto = {
     id: number;
     email: string;
-    role: 'guest' | 'user' | 'admin';
+    role: 'user' | 'admin';
     createdAt: Date;
 };
 
@@ -55,11 +49,21 @@ export type ReservationDto = {
 export type UpdateEventDto = {
     title?: string;
     location?: string | null;
-    /**
-     * Date in YYYY-MM-DD format
-     */
     startsAt?: Date;
     price?: number;
+};
+
+export type PagedUsersDto = {
+    users: Array<UserDto>;
+    total: number;
+    page: number;
+    limit: number;
+    totalPages: number;
+};
+
+export type UpdateUserDto = {
+    email?: string;
+    role?: 'user' | 'admin';
 };
 
 export type PagedReservationsDto = {
@@ -221,6 +225,22 @@ export type GetEventReservationsResponses = {
 
 export type GetEventReservationsResponse = GetEventReservationsResponses[keyof GetEventReservationsResponses];
 
+export type GetAllUsersData = {
+    body?: never;
+    path?: never;
+    query?: {
+        page?: number;
+        limit?: number;
+    };
+    url: '/users';
+};
+
+export type GetAllUsersResponses = {
+    200: PagedUsersDto;
+};
+
+export type GetAllUsersResponse = GetAllUsersResponses[keyof GetAllUsersResponses];
+
 export type GetCurrentUserData = {
     body?: never;
     path?: never;
@@ -228,18 +248,29 @@ export type GetCurrentUserData = {
     url: '/users/me';
 };
 
-export type GetCurrentUserErrors = {
-    /**
-     * Unauthorized
-     */
-    401: unknown;
-};
-
 export type GetCurrentUserResponses = {
     200: UserDto;
 };
 
 export type GetCurrentUserResponse = GetCurrentUserResponses[keyof GetCurrentUserResponses];
+
+export type DeleteUserData = {
+    body?: never;
+    path: {
+        id: number;
+    };
+    query?: never;
+    url: '/users/{id}';
+};
+
+export type DeleteUserResponses = {
+    /**
+     * User deleted successfully
+     */
+    204: void;
+};
+
+export type DeleteUserResponse = DeleteUserResponses[keyof DeleteUserResponses];
 
 export type FindUserByIdData = {
     body?: never;
@@ -255,6 +286,21 @@ export type FindUserByIdResponses = {
 };
 
 export type FindUserByIdResponse = FindUserByIdResponses[keyof FindUserByIdResponses];
+
+export type UpdateUserData = {
+    body: UpdateUserDto;
+    path: {
+        id: number;
+    };
+    query?: never;
+    url: '/users/{id}';
+};
+
+export type UpdateUserResponses = {
+    200: UserDto;
+};
+
+export type UpdateUserResponse = UpdateUserResponses[keyof UpdateUserResponses];
 
 export type GetUserTicketsData = {
     body?: never;

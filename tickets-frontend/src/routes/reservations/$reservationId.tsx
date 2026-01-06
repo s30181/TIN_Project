@@ -1,7 +1,8 @@
 import { Suspense } from 'react'
-import { Link, createFileRoute } from '@tanstack/react-router'
+import { Link, createFileRoute, useNavigate } from '@tanstack/react-router'
 import { Icon } from '@iconify/react'
 import { useTranslation } from 'react-i18next'
+import { useQuery, useSuspenseQuery } from '@tanstack/react-query'
 import type { ReservationDto, UserDto } from '@/api'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
@@ -14,7 +15,7 @@ import { InfoField } from '@/components/shared/info-field'
 import { UserDisplay } from '@/components/shared/user-avatar'
 import { queryKeys } from '@/lib/query-keys'
 import { formatDateTime } from '@/lib/utils'
-import { useProtectedSuspenseQuery } from '@/hooks/use-protected-query'
+import { useAuth } from '@/hooks/use-auth'
 
 export const Route = createFileRoute('/reservations/$reservationId')({
   component: ReservationPageWrapper,
@@ -39,18 +40,28 @@ function ReservationPageLoading() {
 function ReservationPage() {
   const { reservationId } = Route.useParams()
   const id = Number(reservationId)
+  const { isAuthenticated } = useAuth()
+  const navigate = useNavigate({ from: '/' })
 
-  const { data: reservation } = useProtectedSuspenseQuery({
+
+  const { data: reservation } = useQuery({
     queryKey: queryKeys.reservation(id),
-    queryFn: () => getReservationById({ path: { id } }),
+    queryFn: () => getReservationById({ path: { id }, throwOnError: true }).then((res) => res.data),
+    enabled: isAuthenticated,
   })
+
+  if (!isAuthenticated) {
+    navigate({ to: '/' })
+    return null
+  }
 
   return (
     <div className="min-h-screen bg-neutral-900 py-12">
-      <div className="container mx-auto px-4 max-w-2xl space-y-6">
+      <div className="container mx-auto px-4 max-w-2xl space-y-6"> {reservation && (<>
         <ReservationHeader reservation={reservation} />
         <ReservationDetailsCard reservation={reservation} />
         {reservation.user && <ReservationUserCard user={reservation.user} />}
+      </>)}
       </div>
     </div>
   )

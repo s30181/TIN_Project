@@ -30,13 +30,13 @@ export class AuthController {
   constructor(
     private readonly authService: AuthService,
     private readonly configService: AppConfigService,
-  ) {}
+  ) { }
 
   @Post('login')
   @HttpCode(HttpStatus.OK)
   @ApiOperation({ summary: 'Login user', operationId: 'login' })
   @ApiOkResponse({ type: AuthResponseDto })
-  @ApiUnauthorizedResponse({ description: 'Invalid credentials' })
+  @ApiUnauthorizedResponse({})
   async login(
     @Body() loginDto: LoginDto,
     @Res({ passthrough: true }) res: Response,
@@ -55,9 +55,9 @@ export class AuthController {
 
   @Post('register')
   @HttpCode(HttpStatus.CREATED)
-  @ApiOperation({ summary: 'Register new user', operationId: 'register' })
+  @ApiOperation({ operationId: 'register' })
   @ApiCreatedResponse({ type: AuthResponseDto })
-  @ApiConflictResponse({ description: 'User with this email already exists' })
+  @ApiConflictResponse({})
   async register(
     @Body() registerDto: RegisterDto,
     @Res({ passthrough: true }) res: Response,
@@ -77,9 +77,9 @@ export class AuthController {
   @Post('logout')
   @UseGuards(JwtAuthGuard)
   @HttpCode(HttpStatus.OK)
-  @ApiOperation({ summary: 'Logout user', operationId: 'logout' })
-  @ApiOkResponse({ description: 'Successfully logged out' })
-  @ApiUnauthorizedResponse({ description: 'Unauthorized' })
+  @ApiOperation({ operationId: 'logout' })
+  @ApiOkResponse({})
+  @ApiUnauthorizedResponse({})
   logout(@Res({ passthrough: true }) res: Response): { message: string } {
     res.cookie('accessToken', '', {
       httpOnly: true,

@@ -1,7 +1,7 @@
 import { Suspense } from 'react'
 import { Icon } from '@iconify/react'
 import { useSuspenseQuery } from '@tanstack/react-query'
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute, useNavigate } from '@tanstack/react-router'
 import { useTranslation } from 'react-i18next'
 import type { EventDto, UserDto } from '@/api'
 import { findUserById, getUserEvents } from '@/api'
@@ -11,6 +11,7 @@ import { queryKeys } from '@/lib/query-keys'
 import { formatDateTime } from '@/lib/utils'
 import { UserAvatar } from '@/components/shared/user-avatar'
 import { Empty, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from '@/components/ui/empty'
+import { useAuth } from '@/hooks/use-auth'
 
 export const Route = createFileRoute('/users/$userId')({
   component: UserPageWrapper,
@@ -86,13 +87,6 @@ function UserProfileHeader({
             {formatDateTime(user.createdAt, { month: 'long', year: 'numeric' })}
           </span>
         </span>
-      </div>
-
-      <div className="mt-10 pt-10 border-t border-neutral-800 w-full max-w-4xl">
-        <h2 className="text-2xl font-bold mb-2">
-          {t('user.profile.events', 'Organized Events')}
-        </h2>
-        <div className="h-1.5 w-12 bg-primary rounded-full mx-auto" />
       </div>
     </div>
   )

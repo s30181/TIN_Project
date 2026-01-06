@@ -96,7 +96,6 @@ export function CreateEventDialog({ open, onOpenChange }: CreateEventDialogProps
                       onBlur={field.handleBlur}
                       onChange={(e) => field.handleChange(e.target.value)}
                       aria-invalid={isInvalid}
-                      placeholder={t('events.form.titlePlaceholder', 'Ex: Neon Nights Music Festival')}
                     />
                     {isInvalid && <FieldError errors={field.state.meta.errors} />}
                   </Field>
@@ -118,7 +117,6 @@ export function CreateEventDialog({ open, onOpenChange }: CreateEventDialogProps
                       onBlur={field.handleBlur}
                       onChange={(e) => field.handleChange(e.target.value)}
                       aria-invalid={isInvalid}
-                      placeholder={t('events.form.locationPlaceholder', 'Ex: Convention Center')}
                     />
                     {isInvalid && <FieldError errors={field.state.meta.errors} />}
                   </Field>

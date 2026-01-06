@@ -25,7 +25,7 @@ import { useAuth } from '@/hooks/use-auth'
 
 export function Navbar() {
   const { t } = useTranslation()
-  const { user, logout, isLoggingOut } = useAuth()
+  const { user, logout, isLoggingOut, isAdmin } = useAuth()
   const [showCreateEvent, setShowCreateEvent] = useState(false)
   const [showCreateReservation, setShowCreateReservation] = useState(false)
 
@@ -51,6 +51,16 @@ export function Navbar() {
                 className="hover:text-primary transition-colors"
               >
                 {t('navbar.reservations', 'Reservations')}
+              </Link>
+            )}
+
+            {isAdmin && (
+              <Link
+                to="/users"
+                search={{ page: 1 }}
+                className="hover:text-primary transition-colors"
+              >
+                {t('navbar.users', 'Users')}
               </Link>
             )}
           </div>

@@ -33,11 +33,7 @@ export const zPagedEventsDto = z.object({
 export const zUserDto = z.object({
     id: z.number(),
     email: z.string(),
-    role: z.enum([
-        'guest',
-        'user',
-        'admin'
-    ]),
+    role: z.enum(['user', 'admin']),
     createdAt: z.iso.datetime()
 });
 
@@ -63,6 +59,19 @@ export const zUpdateEventDto = z.object({
     ])),
     startsAt: z.optional(z.iso.date().regex(/^\d{4}-\d{2}-\d{2}$/)),
     price: z.optional(z.number().gte(0).lte(1000000))
+});
+
+export const zPagedUsersDto = z.object({
+    users: z.array(zUserDto),
+    total: z.number(),
+    page: z.number(),
+    limit: z.number(),
+    totalPages: z.number()
+});
+
+export const zUpdateUserDto = z.object({
+    email: z.optional(z.string()),
+    role: z.optional(z.enum(['user', 'admin']))
 });
 
 export const zPagedReservationsDto = z.object({
@@ -179,6 +188,17 @@ export const zGetEventReservationsData = z.object({
 
 export const zGetEventReservationsResponse = z.array(zReservationDto);
 
+export const zGetAllUsersData = z.object({
+    body: z.optional(z.never()),
+    path: z.optional(z.never()),
+    query: z.optional(z.object({
+        page: z.optional(z.number().gte(1)).default(1),
+        limit: z.optional(z.number().gte(1).lte(100)).default(10)
+    }))
+});
+
+export const zGetAllUsersResponse = zPagedUsersDto;
+
 export const zGetCurrentUserData = z.object({
     body: z.optional(z.never()),
     path: z.optional(z.never()),
@@ -186,6 +206,19 @@ export const zGetCurrentUserData = z.object({
 });
 
 export const zGetCurrentUserResponse = zUserDto;
+
+export const zDeleteUserData = z.object({
+    body: z.optional(z.never()),
+    path: z.object({
+        id: z.number()
+    }),
+    query: z.optional(z.never())
+});
+
+/**
+ * User deleted successfully
+ */
+export const zDeleteUserResponse = z.void();
 
 export const zFindUserByIdData = z.object({
     body: z.optional(z.never()),
@@ -196,6 +229,16 @@ export const zFindUserByIdData = z.object({
 });
 
 export const zFindUserByIdResponse = zUserDto;
+
+export const zUpdateUserData = z.object({
+    body: zUpdateUserDto,
+    path: z.object({
+        id: z.number()
+    }),
+    query: z.optional(z.never())
+});
+
+export const zUpdateUserResponse = zUserDto;
 
 export const zGetUserTicketsData = z.object({
     body: z.optional(z.never()),

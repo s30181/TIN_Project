@@ -33,13 +33,12 @@
     "creatingAccount": "Creating account..."
   },
   "home": {
-    "featuredEvent": "Featured Event",
-    "heroTitle": "Discover Your Next Unforgettable Experience",
-    "heroSubtitle": "Browse thousands of concerts, festivals, conferences, and exhibitions happening near you.",
+    "heroTitle": "Welcome to TicketsMaster!",
+    "heroSubtitle": "Browse events, reservations, users and more",
     "exploreEvents": "Explore Events",
     "sellTickets": "Sell Tickets",
     "recentEvents": "Recent Events",
-    "recentEventsSubtitle": "Freshly added events you might like.",
+    "recentEventsSubtitle": "Recent events added",
     "viewAll": "View all"
   },
   "common": {
@@ -49,46 +48,27 @@
   },
   "events": {
     "exploreTitle": "Explore Events",
-    "exploreSubtitle": "Discover concerts, conferences, exhibitions, and more going on near you.",
-    "searchPlaceholder": "Search events, locations...",
-    "sortBy": "Sort by",
-    "sort": {
-      "latest": "Latest",
-      "oldest": "Oldest",
-      "popular": "Popular",
-      "titleAsc": "Title (A-Z)",
-      "titleDesc": "Title (Z-A)"
-    },
     "noEvents": "No events found",
     "loading": "Loading...",
     "error": "Error: ",
     "form": {
       "createTitle": "Create New Event",
-      "createDescription": "Fill in the details below to create a new event.",
       "editTitle": "Edit Event",
-      "editDescription": "Update the event details below.",
       "title": "Event Title",
-      "titlePlaceholder": "Ex: Neon Nights Music Festival",
       "titleRequired": "Title is required",
       "description": "Description",
-      "descriptionPlaceholder": "Describe your event...",
       "descriptionMinLength": "Description must be at least 10 characters",
       "location": "Location",
-      "locationPlaceholder": "Ex: Convention Center",
       "locationRequired": "Location is required",
       "startsAt": "Date",
       "startsAtRequired": "Date is required",
       "price": "Price (in cents)",
-      "image": "Image URL",
-      "imagePlaceholder": "https://...",
-      "imageOptional": "Optional. Leave empty for default image.",
-      "imageInvalid": "Must be a valid URL",
       "createButton": "Create Event",
       "creatingButton": "Creating...",
       "saveButton": "Save Changes",
       "savingButton": "Saving...",
       "cancelButton": "Cancel",
-      "fixErrors": "Please fix form errors",
+      "fixErrors": "Please fix errors",
       "failedToCreate": "Failed to create event:"
     },
     "delete": {
@@ -125,7 +105,6 @@
   },
   "reservations": {
     "title": "Reservations",
-    "description": "View and manage your event reservations",
     "allReservations": "All Reservations",
     "myReservations": "My Reservations",
     "noReservations": "No reservations found.",
@@ -206,7 +185,7 @@
     },
     "profile": {
       "title": "User Profile",
-      "events": "Organized Events",
+      "events": "User Events",
       "noEvents": "This user hasn't organized any events yet.",
       "joined": "Joined"
     }

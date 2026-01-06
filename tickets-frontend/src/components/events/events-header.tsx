@@ -8,9 +8,6 @@ export function EventsHeader() {
       <h1 className="text-4xl font-bold text-neutral-50">
         {t('events.exploreTitle', 'Explore Events')}
       </h1>
-      <p className="text-lg text-neutral-400">
-        {t('events.exploreSubtitle', 'Discover concerts, conferences, exhibitions, and more going on near you.')}
-      </p>
     </div>
   )
 }

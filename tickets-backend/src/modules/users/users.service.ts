@@ -142,4 +142,14 @@ export class UsersService {
     const { passwordHash, ...userDto } = updatedUser;
     return userDto as UserDto;
   }
+
+  async remove(id: number): Promise<void> {
+    const user = await this.prisma.user.findUnique({ where: { id } });
+
+    if (!user) {
+      throw new NotFoundException(`User with ID ${id} not found`);
+    }
+
+    await this.prisma.user.delete({ where: { id } });
+  }
 }

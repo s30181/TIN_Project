@@ -70,7 +70,7 @@ export function EditEventDialog({ event, trigger }: EditEventDialogProps) {
       await updateMutation.mutateAsync({
         title: value.title,
         location: value.location || null,
-        startsAt: new Date(value.startsAt),
+        startsAt: value.startsAt as any,
         price: value.price,
       })
     },
@@ -116,7 +116,6 @@ export function EditEventDialog({ event, trigger }: EditEventDialogProps) {
                       onBlur={field.handleBlur}
                       onChange={(e) => field.handleChange(e.target.value)}
                       aria-invalid={isInvalid}
-                      placeholder={t('events.form.titlePlaceholder', 'Ex: Neon Nights Music Festival')}
                     />
                     {isInvalid && <FieldError errors={field.state.meta.errors} />}
                   </Field>
@@ -138,7 +137,6 @@ export function EditEventDialog({ event, trigger }: EditEventDialogProps) {
                       onBlur={field.handleBlur}
                       onChange={(e) => field.handleChange(e.target.value)}
                       aria-invalid={isInvalid}
-                      placeholder={t('events.form.locationPlaceholder', 'Ex: Convention Center')}
                     />
                     {isInvalid && <FieldError errors={field.state.meta.errors} />}
                   </Field>

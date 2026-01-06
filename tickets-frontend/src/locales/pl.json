@@ -80,7 +80,6 @@
       "startsAtRequired": "Data jest wymagana",
       "price": "Cena (w groszach)",
       "image": "Adres URL obrazu",
-      "imagePlaceholder": "https://...",
       "imageOptional": "Opcjonalne. Zostaw puste dla domyślnego obrazu.",
       "imageInvalid": "Musi być poprawnym adresem URL",
       "createButton": "Utwórz wydarzenie",

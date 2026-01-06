@@ -2,9 +2,9 @@
 
 import type { Client, Options as Options2, TDataShape } from './client';
 import { client } from './client.gen';
-import { createEventResponseTransformer, findUserByIdResponseTransformer, getCurrentUserResponseTransformer, getEventByIdResponseTransformer, getEventReservationsResponseTransformer, getEventsResponseTransformer, getMyEventsResponseTransformer, getMyReservationsResponseTransformer, getReservationByIdResponseTransformer, getReservationsResponseTransformer, getUserEventsResponseTransformer, getUserTicketsResponseTransformer, loginResponseTransformer, registerResponseTransformer, reserveEventResponseTransformer, updateEventResponseTransformer, updateReservationResponseTransformer } from './transformers.gen';
-import type { CancelReservationData, CancelReservationResponses, CreateEventData, CreateEventResponses, DeleteEventData, DeleteEventResponses, DeleteReservationData, DeleteReservationResponses, FindUserByIdData, FindUserByIdResponses, GetCurrentUserData, GetCurrentUserErrors, GetCurrentUserResponses, GetEventByIdData, GetEventByIdResponses, GetEventReservationsData, GetEventReservationsResponses, GetEventsData, GetEventsResponses, GetMyEventsData, GetMyEventsResponses, GetMyReservationsData, GetMyReservationsResponses, GetReservationByIdData, GetReservationByIdResponses, GetReservationsData, GetReservationsResponses, GetUserEventsData, GetUserEventsResponses, GetUserTicketsData, GetUserTicketsResponses, HealthControllerLiveData, HealthControllerLiveResponses, HealthControllerReadyData, HealthControllerReadyResponses, LoginData, LoginErrors, LoginResponses, LogoutData, LogoutErrors, LogoutResponses, RegisterData, RegisterErrors, RegisterResponses, ReserveEventData, ReserveEventResponses, UpdateEventData, UpdateEventResponses, UpdateReservationData, UpdateReservationResponses } from './types.gen';
-import { zCancelReservationData, zCreateEventData, zCreateEventResponse, zDeleteEventData, zDeleteEventResponse, zDeleteReservationData, zDeleteReservationResponse, zFindUserByIdData, zFindUserByIdResponse, zGetCurrentUserData, zGetCurrentUserResponse, zGetEventByIdData, zGetEventByIdResponse, zGetEventReservationsData, zGetEventReservationsResponse, zGetEventsData, zGetEventsResponse, zGetMyEventsData, zGetMyEventsResponse, zGetMyReservationsData, zGetMyReservationsResponse, zGetReservationByIdData, zGetReservationByIdResponse, zGetReservationsData, zGetReservationsResponse, zGetUserEventsData, zGetUserEventsResponse, zGetUserTicketsData, zGetUserTicketsResponse, zHealthControllerLiveData, zHealthControllerReadyData, zLoginData, zLoginResponse, zLogoutData, zRegisterData, zRegisterResponse, zReserveEventData, zReserveEventResponse, zUpdateEventData, zUpdateEventResponse, zUpdateReservationData, zUpdateReservationResponse } from './zod.gen';
+import { createEventResponseTransformer, findUserByIdResponseTransformer, getAllUsersResponseTransformer, getCurrentUserResponseTransformer, getEventByIdResponseTransformer, getEventReservationsResponseTransformer, getEventsResponseTransformer, getMyEventsResponseTransformer, getMyReservationsResponseTransformer, getReservationByIdResponseTransformer, getReservationsResponseTransformer, getUserEventsResponseTransformer, getUserTicketsResponseTransformer, loginResponseTransformer, registerResponseTransformer, reserveEventResponseTransformer, updateEventResponseTransformer, updateReservationResponseTransformer, updateUserResponseTransformer } from './transformers.gen';
+import type { CancelReservationData, CancelReservationResponses, CreateEventData, CreateEventResponses, DeleteEventData, DeleteEventResponses, DeleteReservationData, DeleteReservationResponses, DeleteUserData, DeleteUserResponses, FindUserByIdData, FindUserByIdResponses, GetAllUsersData, GetAllUsersResponses, GetCurrentUserData, GetCurrentUserResponses, GetEventByIdData, GetEventByIdResponses, GetEventReservationsData, GetEventReservationsResponses, GetEventsData, GetEventsResponses, GetMyEventsData, GetMyEventsResponses, GetMyReservationsData, GetMyReservationsResponses, GetReservationByIdData, GetReservationByIdResponses, GetReservationsData, GetReservationsResponses, GetUserEventsData, GetUserEventsResponses, GetUserTicketsData, GetUserTicketsResponses, HealthControllerLiveData, HealthControllerLiveResponses, HealthControllerReadyData, HealthControllerReadyResponses, LoginData, LoginErrors, LoginResponses, LogoutData, LogoutErrors, LogoutResponses, RegisterData, RegisterErrors, RegisterResponses, ReserveEventData, ReserveEventResponses, UpdateEventData, UpdateEventResponses, UpdateReservationData, UpdateReservationResponses, UpdateUserData, UpdateUserResponses } from './types.gen';
+import { zCancelReservationData, zCreateEventData, zCreateEventResponse, zDeleteEventData, zDeleteEventResponse, zDeleteReservationData, zDeleteReservationResponse, zDeleteUserData, zDeleteUserResponse, zFindUserByIdData, zFindUserByIdResponse, zGetAllUsersData, zGetAllUsersResponse, zGetCurrentUserData, zGetCurrentUserResponse, zGetEventByIdData, zGetEventByIdResponse, zGetEventReservationsData, zGetEventReservationsResponse, zGetEventsData, zGetEventsResponse, zGetMyEventsData, zGetMyEventsResponse, zGetMyReservationsData, zGetMyReservationsResponse, zGetReservationByIdData, zGetReservationByIdResponse, zGetReservationsData, zGetReservationsResponse, zGetUserEventsData, zGetUserEventsResponse, zGetUserTicketsData, zGetUserTicketsResponse, zHealthControllerLiveData, zHealthControllerReadyData, zLoginData, zLoginResponse, zLogoutData, zRegisterData, zRegisterResponse, zReserveEventData, zReserveEventResponse, zUpdateEventData, zUpdateEventResponse, zUpdateReservationData, zUpdateReservationResponse, zUpdateUserData, zUpdateUserResponse } from './zod.gen';
 
 export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends boolean = boolean> = Options2<TData, ThrowOnError> & {
     /**
@@ -38,9 +38,6 @@ export const healthControllerReady = <ThrowOnError extends boolean = false>(opti
     ...options
 });
 
-/**
- * Get paged and searchable events
- */
 export const getEvents = <ThrowOnError extends boolean = false>(options?: Options<GetEventsData, ThrowOnError>) => (options?.client ?? client).get<GetEventsResponses, unknown, ThrowOnError>({
     requestValidator: async (data) => await zGetEventsData.parseAsync(data),
     responseTransformer: getEventsResponseTransformer,
@@ -49,9 +46,6 @@ export const getEvents = <ThrowOnError extends boolean = false>(options?: Option
     ...options
 });
 
-/**
- * Create event
- */
 export const createEvent = <ThrowOnError extends boolean = false>(options: Options<CreateEventData, ThrowOnError>) => (options.client ?? client).post<CreateEventResponses, unknown, ThrowOnError>({
     requestValidator: async (data) => await zCreateEventData.parseAsync(data),
     responseTransformer: createEventResponseTransformer,
@@ -64,9 +58,6 @@ export const createEvent = <ThrowOnError extends boolean = false>(options: Optio
     }
 });
 
-/**
- * Get current user events
- */
 export const getMyEvents = <ThrowOnError extends boolean = false>(options?: Options<GetMyEventsData, ThrowOnError>) => (options?.client ?? client).get<GetMyEventsResponses, unknown, ThrowOnError>({
     requestValidator: async (data) => await zGetMyEventsData.parseAsync(data),
     responseTransformer: getMyEventsResponseTransformer,
@@ -75,9 +66,6 @@ export const getMyEvents = <ThrowOnError extends boolean = false>(options?: Opti
     ...options
 });
 
-/**
- * Delete event
- */
 export const deleteEvent = <ThrowOnError extends boolean = false>(options: Options<DeleteEventData, ThrowOnError>) => (options.client ?? client).delete<DeleteEventResponses, unknown, ThrowOnError>({
     requestValidator: async (data) => await zDeleteEventData.parseAsync(data),
     responseValidator: async (data) => await zDeleteEventResponse.parseAsync(data),
@@ -85,9 +73,6 @@ export const deleteEvent = <ThrowOnError extends boolean = false>(options: Optio
     ...options
 });
 
-/**
- * Get event by id
- */
 export const getEventById = <ThrowOnError extends boolean = false>(options: Options<GetEventByIdData, ThrowOnError>) => (options.client ?? client).get<GetEventByIdResponses, unknown, ThrowOnError>({
     requestValidator: async (data) => await zGetEventByIdData.parseAsync(data),
     responseTransformer: getEventByIdResponseTransformer,
@@ -96,9 +81,6 @@ export const getEventById = <ThrowOnError extends boolean = false>(options: Opti
     ...options
 });
 
-/**
- * Update event
- */
 export const updateEvent = <ThrowOnError extends boolean = false>(options: Options<UpdateEventData, ThrowOnError>) => (options.client ?? client).put<UpdateEventResponses, unknown, ThrowOnError>({
     requestValidator: async (data) => await zUpdateEventData.parseAsync(data),
     responseTransformer: updateEventResponseTransformer,
@@ -111,9 +93,6 @@ export const updateEvent = <ThrowOnError extends boolean = false>(options: Optio
     }
 });
 
-/**
- * Get event reservations
- */
 export const getEventReservations = <ThrowOnError extends boolean = false>(options: Options<GetEventReservationsData, ThrowOnError>) => (options.client ?? client).get<GetEventReservationsResponses, unknown, ThrowOnError>({
     requestValidator: async (data) => await zGetEventReservationsData.parseAsync(data),
     responseTransformer: getEventReservationsResponseTransformer,
@@ -122,10 +101,20 @@ export const getEventReservations = <ThrowOnError extends boolean = false>(optio
     ...options
 });
 
-/**
- * Get current authenticated user
- */
-export const getCurrentUser = <ThrowOnError extends boolean = false>(options?: Options<GetCurrentUserData, ThrowOnError>) => (options?.client ?? client).get<GetCurrentUserResponses, GetCurrentUserErrors, ThrowOnError>({
+export const getAllUsers = <ThrowOnError extends boolean = false>(options?: Options<GetAllUsersData, ThrowOnError>) => (options?.client ?? client).get<GetAllUsersResponses, unknown, ThrowOnError>({
+    requestValidator: async (data) => await zGetAllUsersData.parseAsync(data),
+    responseTransformer: getAllUsersResponseTransformer,
+    responseValidator: async (data) => await zGetAllUsersResponse.parseAsync(data),
+    security: [{
+            in: 'cookie',
+            name: 'accessToken',
+            type: 'apiKey'
+        }],
+    url: '/users',
+    ...options
+});
+
+export const getCurrentUser = <ThrowOnError extends boolean = false>(options?: Options<GetCurrentUserData, ThrowOnError>) => (options?.client ?? client).get<GetCurrentUserResponses, unknown, ThrowOnError>({
     requestValidator: async (data) => await zGetCurrentUserData.parseAsync(data),
     responseTransformer: getCurrentUserResponseTransformer,
     responseValidator: async (data) => await zGetCurrentUserResponse.parseAsync(data),
@@ -133,9 +122,18 @@ export const getCurrentUser = <ThrowOnError extends boolean = false>(options?: O
     ...options
 });
 
-/**
- * Find user by ID
- */
+export const deleteUser = <ThrowOnError extends boolean = false>(options: Options<DeleteUserData, ThrowOnError>) => (options.client ?? client).delete<DeleteUserResponses, unknown, ThrowOnError>({
+    requestValidator: async (data) => await zDeleteUserData.parseAsync(data),
+    responseValidator: async (data) => await zDeleteUserResponse.parseAsync(data),
+    security: [{
+            in: 'cookie',
+            name: 'accessToken',
+            type: 'apiKey'
+        }],
+    url: '/users/{id}',
+    ...options
+});
+
 export const findUserById = <ThrowOnError extends boolean = false>(options: Options<FindUserByIdData, ThrowOnError>) => (options.client ?? client).get<FindUserByIdResponses, unknown, ThrowOnError>({
     requestValidator: async (data) => await zFindUserByIdData.parseAsync(data),
     responseTransformer: findUserByIdResponseTransformer,
@@ -144,9 +142,23 @@ export const findUserById = <ThrowOnError extends boolean = false>(options: Opti
     ...options
 });
 
-/**
- * Get user tickets
- */
+export const updateUser = <ThrowOnError extends boolean = false>(options: Options<UpdateUserData, ThrowOnError>) => (options.client ?? client).patch<UpdateUserResponses, unknown, ThrowOnError>({
+    requestValidator: async (data) => await zUpdateUserData.parseAsync(data),
+    responseTransformer: updateUserResponseTransformer,
+    responseValidator: async (data) => await zUpdateUserResponse.parseAsync(data),
+    security: [{
+            in: 'cookie',
+            name: 'accessToken',
+            type: 'apiKey'
+        }],
+    url: '/users/{id}',
+    ...options,
+    headers: {
+        'Content-Type': 'application/json',
+        ...options.headers
+    }
+});
+
 export const getUserTickets = <ThrowOnError extends boolean = false>(options: Options<GetUserTicketsData, ThrowOnError>) => (options.client ?? client).get<GetUserTicketsResponses, unknown, ThrowOnError>({
     requestValidator: async (data) => await zGetUserTicketsData.parseAsync(data),
     responseTransformer: getUserTicketsResponseTransformer,
@@ -155,9 +167,6 @@ export const getUserTickets = <ThrowOnError extends boolean = false>(options: Op
     ...options
 });
 
-/**
- * Get user events
- */
 export const getUserEvents = <ThrowOnError extends boolean = false>(options: Options<GetUserEventsData, ThrowOnError>) => (options.client ?? client).get<GetUserEventsResponses, unknown, ThrowOnError>({
     requestValidator: async (data) => await zGetUserEventsData.parseAsync(data),
     responseTransformer: getUserEventsResponseTransformer,
@@ -166,9 +175,6 @@ export const getUserEvents = <ThrowOnError extends boolean = false>(options: Opt
     ...options
 });
 
-/**
- * Get paginated reservations
- */
 export const getReservations = <ThrowOnError extends boolean = false>(options?: Options<GetReservationsData, ThrowOnError>) => (options?.client ?? client).get<GetReservationsResponses, unknown, ThrowOnError>({
     requestValidator: async (data) => await zGetReservationsData.parseAsync(data),
     responseTransformer: getReservationsResponseTransformer,
@@ -177,9 +183,6 @@ export const getReservations = <ThrowOnError extends boolean = false>(options?: 
     ...options
 });
 
-/**
- * Reserve an event
- */
 export const reserveEvent = <ThrowOnError extends boolean = false>(options: Options<ReserveEventData, ThrowOnError>) => (options.client ?? client).post<ReserveEventResponses, unknown, ThrowOnError>({
     requestValidator: async (data) => await zReserveEventData.parseAsync(data),
     responseTransformer: reserveEventResponseTransformer,
@@ -192,9 +195,6 @@ export const reserveEvent = <ThrowOnError extends boolean = false>(options: Opti
     }
 });
 
-/**
- * Get my reservations
- */
 export const getMyReservations = <ThrowOnError extends boolean = false>(options?: Options<GetMyReservationsData, ThrowOnError>) => (options?.client ?? client).get<GetMyReservationsResponses, unknown, ThrowOnError>({
     requestValidator: async (data) => await zGetMyReservationsData.parseAsync(data),
     responseTransformer: getMyReservationsResponseTransformer,
@@ -203,9 +203,6 @@ export const getMyReservations = <ThrowOnError extends boolean = false>(options?
     ...options
 });
 
-/**
- * Delete a reservation
- */
 export const deleteReservation = <ThrowOnError extends boolean = false>(options: Options<DeleteReservationData, ThrowOnError>) => (options.client ?? client).delete<DeleteReservationResponses, unknown, ThrowOnError>({
     requestValidator: async (data) => await zDeleteReservationData.parseAsync(data),
     responseValidator: async (data) => await zDeleteReservationResponse.parseAsync(data),
@@ -213,9 +210,6 @@ export const deleteReservation = <ThrowOnError extends boolean = false>(options:
     ...options
 });
 
-/**
- * Get reservation by ID
- */
 export const getReservationById = <ThrowOnError extends boolean = false>(options: Options<GetReservationByIdData, ThrowOnError>) => (options.client ?? client).get<GetReservationByIdResponses, unknown, ThrowOnError>({
     requestValidator: async (data) => await zGetReservationByIdData.parseAsync(data),
     responseTransformer: getReservationByIdResponseTransformer,
@@ -224,9 +218,6 @@ export const getReservationById = <ThrowOnError extends boolean = false>(options
     ...options
 });
 
-/**
- * Update a reservation
- */
 export const updateReservation = <ThrowOnError extends boolean = false>(options: Options<UpdateReservationData, ThrowOnError>) => (options.client ?? client).patch<UpdateReservationResponses, unknown, ThrowOnError>({
     requestValidator: async (data) => await zUpdateReservationData.parseAsync(data),
     responseTransformer: updateReservationResponseTransformer,
@@ -239,9 +230,6 @@ export const updateReservation = <ThrowOnError extends boolean = false>(options:
     }
 });
 
-/**
- * Cancel a reservation
- */
 export const cancelReservation = <ThrowOnError extends boolean = false>(options: Options<CancelReservationData, ThrowOnError>) => (options.client ?? client).post<CancelReservationResponses, unknown, ThrowOnError>({
     requestValidator: async (data) => await zCancelReservationData.parseAsync(data),
     url: '/reservations/{id}/cancel',

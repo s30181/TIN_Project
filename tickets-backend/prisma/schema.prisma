@@ -31,7 +31,7 @@ model Event {
     createdAt DateTime @default(now()) @map("created_at")
     updatedAt DateTime @default(now()) @map("updated_at")
 
-    organizer    User          @relation(fields: [organizerId], references: [id])
+    organizer    User          @relation(fields: [organizerId], references: [id], onDelete: Cascade)
     reservations Reservation[]
 
     @@map("event")
@@ -54,7 +54,6 @@ model Reservation {
 }
 
 enum UserRole {
-    guest
     user
     admin
 }
