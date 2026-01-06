@@ -1,0 +1,66 @@
+datasource db {
+    provider = "sqlite"
+}
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+model User {
+    id           Int           @id @default(autoincrement())
+    email        String        @unique
+    passwordHash String        @map("password_hash")
+    role         UserRole
+    events       Event[]
+    reservations Reservation[]
+
+    createdAt DateTime @default(now()) @map("created_at")
+    updatedAt DateTime @default(now()) @map("updated_at")
+
+    @@map("user")
+}
+
+model Event {
+    id          Int      @id @default(autoincrement())
+    title       String
+    location    String?
+    startsAt    DateTime @map("starts_at")
+    price       Int
+    organizerId Int      @map("organizer_id")
+
+    createdAt DateTime @default(now()) @map("created_at")
+    updatedAt DateTime @default(now()) @map("updated_at")
+
+    organizer    User          @relation(fields: [organizerId], references: [id])
+    reservations Reservation[]
+
+    @@map("event")
+}
+
+model Reservation {
+    id       Int              @id @default(autoincrement())
+    userId   Int              @map("user_id")
+    eventId  Int              @map("event_id")
+    status   AttendanceStatus
+
+    purchasedAt DateTime @default(now()) @map("purchased_at")
+    updatedAt   DateTime @default(now()) @map("updated_at")
+
+    user  User  @relation(fields: [userId], references: [id])
+    event Event @relation(fields: [eventId], references: [id])
+
+    @@unique([userId, eventId])
+    @@map("reservation")
+}
+
+enum UserRole {
+    guest
+    user
+    admin
+}
+
+enum AttendanceStatus {
+    reserved
+    paid
+    cancelled
+}

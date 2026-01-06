@@ -1,0 +1,50 @@
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { useNavigate } from '@tanstack/react-router'
+import { getCurrentUser, logout } from '@/api'
+import { queryKeys } from '@/lib/query-keys'
+
+export function useAuth() {
+  const queryClient = useQueryClient()
+  const navigate = useNavigate()
+
+  const {
+    data: user,
+    isLoading,
+    error,
+  } = useQuery({
+    queryKey: queryKeys.currentUser,
+    queryFn: async () => {
+      try {
+        const response = await getCurrentUser({ throwOnError: true })
+        return response.data
+      } catch {
+        return null
+      }
+    },
+    retry: false,
+    staleTime: 1000 * 60 * 5, // 5 minutes
+  })
+
+  const logoutMutation = useMutation({
+    mutationFn: () => logout({ throwOnError: true }),
+    onSuccess: () => {
+      queryClient.setQueryData(queryKeys.currentUser, null)
+      queryClient.invalidateQueries({ queryKey: queryKeys.currentUser })
+      navigate({ to: '/' })
+    },
+  })
+
+  const invalidateUser = () => {
+    queryClient.invalidateQueries({ queryKey: queryKeys.currentUser })
+  }
+
+  return {
+    user,
+    isLoading,
+    isAuthenticated: !!user,
+    error,
+    logout: logoutMutation.mutate,
+    isLoggingOut: logoutMutation.isPending,
+    invalidateUser,
+  }
+}
