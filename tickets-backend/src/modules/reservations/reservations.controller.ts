@@ -38,7 +38,6 @@ export class ReservationsController {
 
   @Get()
   @ApiOperation({
-    summary: 'Get paginated reservations',
     operationId: 'getReservations',
   })
   @ApiOkResponse({ type: PagedReservationsDto })
@@ -51,7 +50,6 @@ export class ReservationsController {
 
   @Get('me')
   @ApiOperation({
-    summary: 'Get my reservations',
     operationId: 'getMyReservations',
   })
   @ApiOkResponse({ type: [ReservationDto] })
@@ -61,7 +59,6 @@ export class ReservationsController {
 
   @Get(':id')
   @ApiOperation({
-    summary: 'Get reservation by ID',
     operationId: 'getReservationById',
   })
   @ApiOkResponse({ type: ReservationDto })
@@ -74,7 +71,6 @@ export class ReservationsController {
 
   @Post()
   @ApiOperation({
-    summary: 'Reserve an event',
     operationId: 'reserveEvent',
   })
   @ApiCreatedResponse({ type: ReservationDto })
@@ -87,7 +83,6 @@ export class ReservationsController {
 
   @Patch(':id')
   @ApiOperation({
-    summary: 'Update a reservation',
     operationId: 'updateReservation',
   })
   @ApiOkResponse({ type: ReservationDto })
@@ -107,7 +102,6 @@ export class ReservationsController {
   @Post(':id/cancel')
   @HttpCode(HttpStatus.OK)
   @ApiOperation({
-    summary: 'Cancel a reservation',
     operationId: 'cancelReservation',
   })
   cancelReservation(
@@ -120,7 +114,6 @@ export class ReservationsController {
   @Delete(':id')
   @HttpCode(HttpStatus.NO_CONTENT)
   @ApiOperation({
-    summary: 'Delete a reservation',
     operationId: 'deleteReservation',
   })
   deleteReservation(

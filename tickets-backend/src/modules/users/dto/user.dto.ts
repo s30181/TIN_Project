@@ -14,3 +14,20 @@ export class UserDto {
   @ApiProperty()
   createdAt: Date;
 }
+
+export class PagedUsersDto {
+  @ApiProperty({ type: [UserDto] })
+  users: UserDto[];
+
+  @ApiProperty()
+  total: number;
+
+  @ApiProperty()
+  page: number;
+
+  @ApiProperty()
+  limit: number;
+
+  @ApiProperty()
+  totalPages: number;
+}

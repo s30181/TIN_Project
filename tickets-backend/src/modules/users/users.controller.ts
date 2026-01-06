@@ -5,6 +5,8 @@ import {
   ParseIntPipe,
   Query,
   UseGuards,
+  Patch,
+  Body,
 } from '@nestjs/common';
 import {
   ApiOkResponse,
@@ -13,19 +15,36 @@ import {
   ApiCookieAuth,
   ApiUnauthorizedResponse,
   ApiQuery,
+  ApiForbiddenResponse,
 } from '@nestjs/swagger';
 import { UsersService } from './users.service';
-import { UserDto } from './dto/user.dto';
+import { UserDto, PagedUsersDto } from './dto/user.dto';
 import { GetEventsQueryDto } from '../events/dto/get-events-query.dto';
 import { PagedEventsDto } from '../events/dto/event.dto';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+import { RolesGuard } from '../auth/guards/roles.guard';
 import { CurrentUser } from '../auth/decorators/current-user.decorator';
+import { Roles } from '../auth/decorators/roles.decorator';
 import { ReservationDto } from '../reservations/dto/reservation.dto';
+import { GetUsersQueryDto } from './dto/get-users-query.dto';
+import { UpdateUserDto } from './dto/update-user.dto';
+import { UserRole } from '@prisma/client';
 
 @ApiTags('users')
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) { }
+
+  @Get()
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(UserRole.admin)
+  @ApiCookieAuth()
+  @ApiOkResponse({ type: PagedUsersDto })
+  @ApiOperation({ operationId: 'getAllUsers' })
+  @ApiQuery({ type: GetUsersQueryDto })
+  async findAll(@Query() query: GetUsersQueryDto): Promise<PagedUsersDto> {
+    return this.usersService.findAll(query);
+  }
 
   @Get('me')
   @UseGuards(JwtAuthGuard)
@@ -42,6 +61,19 @@ export class UsersController {
   @ApiOperation({ operationId: 'findUserById' })
   async findOne(@Param('id', ParseIntPipe) id: number): Promise<UserDto> {
     return this.usersService.findOne(id);
+  }
+
+  @Patch(':id')
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(UserRole.admin)
+  @ApiCookieAuth()
+  @ApiOkResponse({ type: UserDto })
+  @ApiOperation({ operationId: 'updateUser' })
+  async update(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() updateUserDto: UpdateUserDto,
+  ): Promise<UserDto> {
+    return this.usersService.update(id, updateUserDto);
   }
 
   @Get(':id/ticket')

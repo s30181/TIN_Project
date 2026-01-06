@@ -1,9 +1,15 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  ConflictException,
+} from '@nestjs/common';
 import { PrismaService } from '../../database/prisma.service';
 import { Event, User } from '@prisma/client';
 import { GetEventsQueryDto } from '../events/dto/get-events-query.dto';
 import { EventDto, PagedEventsDto } from '../events/dto/event.dto';
-import { UserDto } from './dto/user.dto';
+import { UserDto, PagedUsersDto } from './dto/user.dto';
+import { GetUsersQueryDto } from './dto/get-users-query.dto';
+import { UpdateUserDto } from './dto/update-user.dto';
 
 @Injectable()
 export class UsersService {
@@ -85,5 +91,55 @@ export class UsersService {
       ...r,
       event: this.toEventDto(r.event),
     }));
+  }
+
+  async findAll(query: GetUsersQueryDto): Promise<PagedUsersDto> {
+    const page = query.page ?? 1;
+    const limit = query.limit ?? 10;
+    const skip = (page - 1) * limit;
+
+    const [users, total] = await Promise.all([
+      this.prisma.user.findMany({
+        skip,
+        take: limit,
+        orderBy: { createdAt: 'desc' },
+      }),
+      this.prisma.user.count(),
+    ]);
+
+    const totalPages = Math.ceil(total / limit);
+
+    return {
+      users: users.map(({ passwordHash, ...user }) => user as UserDto),
+      total,
+      page,
+      limit,
+      totalPages,
+    };
+  }
+
+  async update(id: number, updateUserDto: UpdateUserDto): Promise<UserDto> {
+    const user = await this.prisma.user.findUnique({ where: { id } });
+
+    if (!user) {
+      throw new NotFoundException(`User with ID ${id} not found`);
+    }
+
+    if (updateUserDto.email && updateUserDto.email !== user.email) {
+      const existingUser = await this.prisma.user.findUnique({
+        where: { email: updateUserDto.email },
+      });
+      if (existingUser) {
+        throw new ConflictException('Email already in use');
+      }
+    }
+
+    const updatedUser = await this.prisma.user.update({
+      where: { id },
+      data: updateUserDto,
+    });
+
+    const { passwordHash, ...userDto } = updatedUser;
+    return userDto as UserDto;
   }
 }
