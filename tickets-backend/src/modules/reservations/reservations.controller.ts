@@ -34,7 +34,7 @@ import { UserDto } from '../users/dto/user.dto';
 @UseGuards(JwtAuthGuard)
 @ApiBearerAuth()
 export class ReservationsController {
-  constructor(private readonly reservationsService: ReservationsService) {}
+  constructor(private readonly reservationsService: ReservationsService) { }
 
   @Get()
   @ApiOperation({
@@ -114,7 +114,7 @@ export class ReservationsController {
     @Param('id', ParseIntPipe) id: number,
     @CurrentUser() user: UserDto,
   ): Promise<void> {
-    return this.reservationsService.cancelReservation(user.id, id);
+    return this.reservationsService.cancelReservation(user.id, id, user.role);
   }
 
   @Delete(':id')

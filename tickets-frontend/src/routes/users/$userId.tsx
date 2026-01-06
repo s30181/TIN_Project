@@ -3,16 +3,14 @@ import { Icon } from '@iconify/react'
 import { useSuspenseQuery } from '@tanstack/react-query'
 import { createFileRoute } from '@tanstack/react-router'
 import { useTranslation } from 'react-i18next'
-import { ArrowUpRightIcon } from 'lucide-react'
 import type { EventDto, UserDto } from '@/api'
-import type { Button } from '@base-ui/react/button'
 import { findUserById, getUserEvents } from '@/api'
 import { EventCard } from '@/components/event/event-card'
 import { UserRoleBadge } from '@/components/shared/user-role-badge'
 import { queryKeys } from '@/lib/query-keys'
 import { formatDateTime } from '@/lib/utils'
 import { UserAvatar } from '@/components/shared/user-avatar'
-import { Empty, EmptyContent, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from '@/components/ui/empty'
+import { Empty, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from '@/components/ui/empty'
 
 export const Route = createFileRoute('/users/$userId')({
   component: UserPageWrapper,
@@ -119,7 +117,6 @@ function UserEventsSection({
 }
 
 function EmptyEventsState() {
-  const { t } = useTranslation()
 
   return (
     <Empty>

@@ -12,8 +12,13 @@ cp .env.example .env
 npm run db:generate
 npm run db:migrate
 npm run db:seed
+
+# for prod
 npm run build
 npm run start
+
+# for dev
+npm run start:dev
 ```
 Backend: `http://localhost:3000`
 API docs: `http://localhost:3000/docs`
@@ -22,9 +27,8 @@ API docs: `http://localhost:3000/docs`
 ```bash
 cd tickets-frontend
 npm install
-cp .env.example .env
 
-npm run api:generate
+# for dev
 npm run dev
 ```
 Frontend: `http://localhost:3001`

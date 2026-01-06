@@ -1,6 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { useSuspenseQuery } from '@tanstack/react-query'
-import { useTranslation } from 'react-i18next'
 import { Banner } from '@/components/home/banner'
 import { EventSection } from '@/components/home/events-section'
 import { getEvents } from '@/api'
@@ -11,7 +10,6 @@ export const Route = createFileRoute('/')({
 })
 
 function App() {
-  const { t } = useTranslation()
   const { data } = useSuspenseQuery({
     queryKey: queryKeys.events(1, 10),
     queryFn: () => getEvents({ query: { page: 1, limit: 10 }, throwOnError: true }),

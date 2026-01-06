@@ -64,13 +64,13 @@ export function EditEventDialog({ event, trigger }: EditEventDialogProps) {
       price: event.price,
     },
     validators: {
-      onSubmit: zUpdateEventDto,
+      onSubmit: zUpdateEventDto as any,
     },
     onSubmit: async ({ value }) => {
       await updateMutation.mutateAsync({
         title: value.title,
         location: value.location || null,
-        startsAt: value.startsAt,
+        startsAt: new Date(value.startsAt),
         price: value.price,
       })
     },

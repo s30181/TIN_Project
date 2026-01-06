@@ -94,6 +94,7 @@ export class ReservationsService {
   async cancelReservation(
     userId: number,
     reservationId: number,
+    userRole: UserRole,
   ): Promise<void> {
     const reservation = await this.prisma.reservation.findUnique({
       where: { id: reservationId },
@@ -105,7 +106,7 @@ export class ReservationsService {
       );
     }
 
-    if (reservation.userId !== userId) {
+    if (reservation.userId !== userId && userRole !== UserRole.admin) {
       throw new ForbiddenException('You do not own this reservation');
     }
 

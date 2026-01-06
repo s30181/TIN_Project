@@ -55,12 +55,12 @@ export function CreateEventDialog({ open, onOpenChange }: CreateEventDialogProps
       location: '',
       startsAt: '',
       price: 0,
-    } as CreateEventDto,
+    },
     validators: {
-      onSubmit: zCreateEventDto,
+      onSubmit: zCreateEventDto as any,
     },
     onSubmit: async ({ value }) => {
-      await createEventMutation.mutateAsync(value)
+      await createEventMutation.mutateAsync(value as any)
     },
   })
 
