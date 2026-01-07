@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next'
 import type { EventDto, UserDto } from '@/api'
 import { findUserById, getUserEvents } from '@/api'
 import { EventCard } from '@/components/event/event-card'
+import { PageLoader } from '@/components/shared/page-loader'
 import { UserRoleBadge } from '@/components/shared/user-role-badge'
 import { queryKeys } from '@/lib/query-keys'
 import { formatDateTime } from '@/lib/utils'
@@ -18,7 +19,6 @@ export const Route = createFileRoute('/users/$userId')({
 })
 
 function UserPageWrapper() {
-  // TODO: Add error boundary
   return (
     <Suspense fallback={<UserPageLoading />}>
       <UserPage />
@@ -27,11 +27,7 @@ function UserPageWrapper() {
 }
 
 function UserPageLoading() {
-  return (
-    <div className="min-h-screen bg-neutral-900 flex items-center justify-center">
-      <Icon icon="lucide:loader-2" className="w-8 h-8 animate-spin" />
-    </div>
-  )
+  return <PageLoader />
 }
 
 function UserPage() {

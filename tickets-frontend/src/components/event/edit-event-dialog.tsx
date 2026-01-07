@@ -60,17 +60,17 @@ export function EditEventDialog({ event, trigger }: EditEventDialogProps) {
     defaultValues: {
       title: event.title,
       location: event.location ?? '',
-      startsAt: "",
+      startsAt: event.startsAt ? new Date(event.startsAt).toISOString().split('T')[0] : '',
       price: event.price,
     },
     validators: {
-      onSubmit: zUpdateEventDto as any,
+      onSubmit: zUpdateEventDto as any, // TODO: Fix the as any here
     },
     onSubmit: async ({ value }) => {
       await updateMutation.mutateAsync({
         title: value.title,
         location: value.location || null,
-        startsAt: value.startsAt as any,
+        startsAt: value.startsAt as any, 
         price: value.price,
       })
     },

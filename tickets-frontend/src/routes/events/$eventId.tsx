@@ -7,7 +7,6 @@ import type { ReservationDto, UserDto } from '@/api'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import {
-
   findUserById,
   getEventById,
   getEventReservations,
@@ -20,6 +19,7 @@ import { DeleteReservationDialog } from '@/components/reservation/delete-reserva
 import { CancelReservationDialog } from '@/components/reservation/cancel-reservation-dialog'
 import { ReservationsList } from '@/components/event/reservations-list'
 import { InfoField } from '@/components/shared/info-field'
+import { PageLoader } from '@/components/shared/page-loader'
 import { formatEventDateLong, formatPrice } from '@/lib/utils'
 import { ReservationStatusBadge } from '@/components/shared/reservation-status-badge'
 import { UserDisplay } from '@/components/shared/user-avatar'
@@ -39,11 +39,7 @@ function EventPageWrapper() {
 }
 
 function EventPageLoading() {
-  return (
-    <div className="min-h-screen bg-neutral-900 flex items-center justify-center">
-      <Icon icon="lucide:loader-2" className="w-8 h-8 animate-spin" />
-    </div>
-  )
+  return <PageLoader />
 }
 
 function EventPage() {
@@ -292,7 +288,7 @@ function OrganizerCard({
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <UserDisplay user={organizer} linkToProfile size="lg" />
+        <UserDisplay user={organizer} size="lg" />
       </CardContent>
     </Card>
   )

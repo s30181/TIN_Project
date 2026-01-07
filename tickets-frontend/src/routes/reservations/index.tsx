@@ -1,10 +1,12 @@
-import { createFileRoute, redirect, useNavigate } from '@tanstack/react-router'
+import { useEffect } from 'react'
+import { createFileRoute, useNavigate } from '@tanstack/react-router'
 import { useTranslation } from 'react-i18next'
 import { Icon } from '@iconify/react'
-import { useQuery, useSuspenseQuery } from '@tanstack/react-query'
+import { useQuery } from '@tanstack/react-query'
 import { getReservations } from '@/api'
 import { ReservationCard } from '@/components/reservation/reservation-card'
 import { AppPagination } from '@/components/shared/app-pagination'
+import { PageLoader } from '@/components/shared/page-loader'
 import { queryKeys } from '@/lib/query-keys'
 import { Empty, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from '@/components/ui/empty'
 import { useAuth } from '@/hooks/use-auth'
@@ -26,8 +28,14 @@ function ReservationsPage() {
   const { t } = useTranslation()
   const navigate = useNavigate({ from: '/reservations' })
   const { page } = Route.useSearch()
-  const limit = 20
-  const { isAuthenticated } = useAuth()
+  const limit = 10
+  const { isAuthenticated, isLoading: isAuthLoading } = useAuth()
+
+  useEffect(() => {
+    if (!isAuthLoading && !isAuthenticated) {
+      navigate({ to: '/' })
+    }
+  }, [isAuthLoading, isAuthenticated, navigate])
 
   const { data } = useQuery({
     queryKey: queryKeys.reservations(page, limit),
@@ -43,8 +51,11 @@ function ReservationsPage() {
     navigate({ search: (prev) => ({ ...prev, page: newPage }) })
   }
 
+  if (isAuthLoading) {
+    return <PageLoader />
+  }
+
   if (!isAuthenticated) {
-    navigate({ to: '/' })
     return null
   }
 

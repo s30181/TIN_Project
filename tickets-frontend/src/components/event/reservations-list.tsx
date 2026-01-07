@@ -101,7 +101,7 @@ function ReservationRow({
     <tr className="border-b transition-colors hover:bg-neutral-800/50 data-[state=selected]:bg-neutral-800">
       {showUser && reservation.user && (
         <td className="p-4 align-middle">
-          <UserDisplay user={reservation.user} linkToProfile size="sm" />
+          <UserDisplay user={reservation.user} size="sm" />
         </td>
       )}
       <td className="p-4 align-middle">

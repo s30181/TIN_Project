@@ -1,9 +1,11 @@
+import { useEffect } from 'react'
 import { createFileRoute, useNavigate } from '@tanstack/react-router'
 import { useQuery } from '@tanstack/react-query'
 import { useTranslation } from 'react-i18next'
 import { Icon } from '@iconify/react'
 import { getAllUsers } from '@/api'
 import { AppPagination } from '@/components/shared/app-pagination'
+import { PageLoader } from '@/components/shared/page-loader'
 import { UsersTable } from '@/components/user/users-table'
 import { queryKeys } from '@/lib/query-keys'
 import { useAuth } from '@/hooks/use-auth'
@@ -14,7 +16,7 @@ import {
   EmptyTitle,
   EmptyDescription,
 } from '@/components/ui/empty'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Card, CardContent } from '@/components/ui/card'
 
 export type UsersSearch = {
   page: number
@@ -33,8 +35,14 @@ function UsersPage() {
   const { t } = useTranslation()
   const navigate = useNavigate({ from: '/users' })
   const { page } = Route.useSearch()
-  const { user: currentUser, isAdmin } = useAuth()
+  const { user: currentUser, isAdmin, isLoading: isAuthLoading } = useAuth()
   const limit = 20
+
+  useEffect(() => {
+    if (!isAuthLoading && !isAdmin) {
+      navigate({ to: '/' })
+    }
+  }, [isAuthLoading, isAdmin, navigate])
 
   const { data, isLoading } = useQuery({
     queryKey: queryKeys.users(page, limit),
@@ -55,6 +63,14 @@ function UsersPage() {
     navigate({ search: (prev) => ({ ...prev, page: newPage }) })
   }
 
+  if (isAuthLoading) {
+    return <PageLoader />
+  }
+
+  if (!isAdmin) {
+    return null
+  }
+
   return (
     <div className="min-h-screen bg-neutral-900 pb-20 pt-24">
       <div className="container mx-auto px-4">
@@ -66,9 +82,7 @@ function UsersPage() {
         </div>
 
         {isLoading ? (
-          <div className="flex items-center justify-center py-20">
-            <Icon icon="lucide:loader-2" className="h-8 w-8 animate-spin text-neutral-400" />
-          </div>
+          <PageLoader fullScreen={false} />
         ) : users.length === 0 ? (
           <Empty>
             <EmptyHeader>

@@ -52,7 +52,6 @@ export function UserAvatarIcon({ size = 'md', className }: UserAvatarIconProps) 
 interface UserDisplayProps {
   user: Pick<UserDto, 'id' | 'email' | 'role'>
   showRole?: boolean
-  linkToProfile?: boolean
   size?: 'sm' | 'md' | 'lg'
   className?: string
 }
@@ -60,31 +59,23 @@ interface UserDisplayProps {
 export function UserDisplay({
   user,
   showRole = true,
-  linkToProfile = false,
   size = 'md',
   className,
 }: UserDisplayProps) {
-  const content = (
-    <div className={cn(`flex items-center gap-3`, className)}>
-      <UserAvatar email={user.email} size={size} />
-      <div className="flex flex-col gap-1">
-        <p className="font-medium">{user.email}</p>
-        {showRole && <UserRoleBadge role={user.role} className="w-fit" />}
+
+  return (
+    <Link
+      to="/users/$userId"
+      params={{ userId: user.id.toString() }}
+      className="hover:opacity-80 transition-opacity"
+    >
+      <div className={cn(`flex items-center gap-3`, className)}>
+        <UserAvatar email={user.email} size={size} />
+        <div className="flex flex-col gap-1">
+          <p className="font-medium">{user.email}</p>
+          {showRole && <UserRoleBadge role={user.role} className="w-fit" />}
+        </div>
       </div>
-    </div>
+    </Link>
   )
-
-  if (linkToProfile) {
-    return (
-      <Link
-        to="/users/$userId"
-        params={{ userId: user.id.toString() }}
-        className="hover:opacity-80 transition-opacity"
-      >
-        {content}
-      </Link>
-    )
-  }
-
-  return content
 }

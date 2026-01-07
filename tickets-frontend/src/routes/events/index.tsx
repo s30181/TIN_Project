@@ -26,7 +26,7 @@ function EventsPage() {
   const { t } = useTranslation()
   const navigate = useNavigate({ from: '/events' })
   const { page } = Route.useSearch()
-  const limit = 20
+  const limit = 10
 
   const { data } = useSuspenseQuery({
     queryKey: queryKeys.events(page, limit),

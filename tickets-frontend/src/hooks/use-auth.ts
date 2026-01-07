@@ -28,15 +28,11 @@ export function useAuth() {
   const logoutMutation = useMutation({
     mutationFn: () => logout({ throwOnError: true }),
     onSuccess: () => {
-      queryClient.setQueryData(queryKeys.currentUser, null)
-      queryClient.invalidateQueries({ queryKey: queryKeys.currentUser })
+      queryClient.clear()
       navigate({ to: '/' })
     },
   })
 
-  const invalidateUser = () => {
-    queryClient.invalidateQueries({ queryKey: queryKeys.currentUser })
-  }
 
   return {
     user,
@@ -46,6 +42,5 @@ export function useAuth() {
     error,
     logout: logoutMutation.mutate,
     isLoggingOut: logoutMutation.isPending,
-    invalidateUser,
   }
 }

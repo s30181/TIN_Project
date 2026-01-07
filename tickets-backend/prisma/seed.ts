@@ -1,6 +1,7 @@
 import 'dotenv/config';
 import { PrismaClient, UserRole } from '@prisma/client';
 import { PrismaBetterSqlite3 } from '@prisma/adapter-better-sqlite3';
+import * as bcrypt from 'bcrypt';
 
 const adapter = new PrismaBetterSqlite3({
   url: process.env.SQLITE_URL!,
@@ -9,35 +10,32 @@ const adapter = new PrismaBetterSqlite3({
 const prisma = new PrismaClient({ adapter });
 
 async function main() {
-  const adminPasswordHash =
-    '$2b$10$Vz.yrBT8y6NEwbb3AeJRyO7wQ4ky4SIMHxN.qnb0TVeJwHQrm4k0O';
-  const userPasswordHash =
-    '$2b$10$FT25dWn2GHfzh3CuAs0F3OOAIKT598IIjlH1Cj2VyLPFRVAUvVM5.';
+  const passwordHash = await bcrypt.hash('admin123', 10);
 
   await prisma.user.createMany({
     data: [
       {
         id: 1,
         email: 'admin@example.com',
-        passwordHash: adminPasswordHash,
+        passwordHash,
         role: UserRole.admin,
       },
       {
         id: 2,
         email: 'john@example.com',
-        passwordHash: userPasswordHash,
+        passwordHash,
         role: UserRole.user,
       },
       {
         id: 3,
         email: 'jane@example.com',
-        passwordHash: userPasswordHash,
+        passwordHash,
         role: UserRole.user,
       },
       {
         id: 4,
         email: 'bob@example.com',
-        passwordHash: userPasswordHash,
+        passwordHash,
         role: UserRole.user,
       },
     ],

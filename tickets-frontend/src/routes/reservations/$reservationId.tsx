@@ -10,6 +10,7 @@ import { getReservationById } from '@/api'
 import { EditReservationDialog } from '@/components/reservation/edit-reservation-dialog'
 import { DeleteReservationDialog } from '@/components/reservation/delete-reservation-dialog'
 import { CancelReservationDialog } from '@/components/reservation/cancel-reservation-dialog'
+import { PageLoader } from '@/components/shared/page-loader'
 import { ReservationStatusBadge } from '@/components/shared/reservation-status-badge'
 import { InfoField } from '@/components/shared/info-field'
 import { UserDisplay } from '@/components/shared/user-avatar'
@@ -30,13 +31,7 @@ function ReservationPageWrapper() {
 }
 
 function ReservationPageLoading() {
-  // TODO: Maybe use a skeleton loader instead?
-
-  return (
-    <div className="min-h-screen bg-neutral-900 flex items-center justify-center">
-      <Icon icon="lucide:loader-2" className="w-8 h-8 animate-spin" />
-    </div>
-  )
+  return <PageLoader />
 }
 
 function ReservationPage() {
@@ -173,7 +168,7 @@ function ReservationUserCard({
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <UserDisplay user={user} linkToProfile size="lg" />
+        <UserDisplay user={user} size="lg" />
       </CardContent>
     </Card>
   )
