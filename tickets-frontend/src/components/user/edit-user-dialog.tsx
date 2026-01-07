@@ -69,7 +69,7 @@ export function EditUserDialog({ user, trigger }: EditUserDialogProps) {
       role: user.role,
     },
     validators: {
-      onSubmit: zUpdateUserDto as any // Remoe any here,
+      onSubmit: zUpdateUserDto as any
     },
     onSubmit: async ({ value }) => {
       await updateMutation.mutateAsync({

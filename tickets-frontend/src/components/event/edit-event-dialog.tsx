@@ -64,7 +64,7 @@ export function EditEventDialog({ event, trigger }: EditEventDialogProps) {
       price: event.price,
     },
     validators: {
-      onSubmit: zUpdateEventDto as any, // TODO: Fix the as any here
+      onSubmit: zUpdateEventDto as any,
     },
     onSubmit: async ({ value }) => {
       await updateMutation.mutateAsync({

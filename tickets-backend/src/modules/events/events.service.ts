@@ -42,7 +42,6 @@ export class EventsService {
   }
 
   async findAll(query: GetEventsQueryDto): Promise<PagedEventsDto> {
-    // TODO: Refactor this to generic pagination
     const page = query.page ?? 1;
     const limit = query.limit ?? 10;
     const skip = (page - 1) * limit;
